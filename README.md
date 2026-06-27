@@ -303,6 +303,17 @@ python examples/demo_story.py       # the full allow / approve / deny story
 - **Audit-first.** The decision is recorded before any execution is attempted;
   the result is recorded after.
 
+## Project documents
+
+The founding documents for Aegize — useful for contributors and for understanding
+where the project is headed:
+
+- [Vision](./docs/vision.md) — the thesis, the problem, and the long-term ambition.
+- [Roadmap](./docs/roadmap.md) — from the current SDK to runtime governance.
+- [Architecture](./docs/architecture.md) — primitives, runtime flow, and trust model.
+- [Brand](./docs/brand.md) — positioning, messaging, and visual language.
+- [Decisions](./docs/decisions.md) — the record of why things are the way they are.
+
 ## Roadmap
 
 - ~~`@guarded_tool` decorator + `GuardContext` ergonomics.~~ ✅ v0.2
