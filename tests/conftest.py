@@ -1,10 +1,10 @@
-"""Shared fixtures for the AgentGuard test suite."""
+"""Shared fixtures for the Aegize test suite."""
 
 from __future__ import annotations
 
 import pytest
 
-from agentguard import AgentIdentity, AuditLog, PermissionPolicy
+from aegize import AgentIdentity, AuditLog, PermissionPolicy
 
 POLICY_DICT = {
     "agents": {

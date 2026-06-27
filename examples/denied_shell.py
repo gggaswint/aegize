@@ -8,7 +8,7 @@ executed and a `denied` record is written to the audit log.
 
 from pathlib import Path
 
-from agentguard import AgentIdentity, AuditLog, GuardedTool, PermissionPolicy, PolicyDenied
+from aegize import AgentIdentity, AuditLog, GuardedTool, PermissionPolicy, PolicyDenied
 
 HERE = Path(__file__).parent
 
@@ -25,7 +25,7 @@ def main() -> None:
         owner="Geoffrey",
         environment="dev",
     )
-    policy = PermissionPolicy.from_yaml(HERE / "agentguard.yaml")
+    policy = PermissionPolicy.from_yaml(HERE / "aegize.yaml")
     audit = AuditLog(HERE / "audit.jsonl")
 
     dangerous_rm = GuardedTool(

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from agentguard import Decision, PermissionPolicy, PolicyLoadError, ToolAction
-from agentguard.policy import _path_matches
+from aegize import Decision, PermissionPolicy, PolicyLoadError, ToolAction
+from aegize.policy import _path_matches
 
 POLICY_YAML = """
 agents:

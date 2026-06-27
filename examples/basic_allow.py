@@ -8,7 +8,7 @@ through and two audit records are written (authorization + success).
 
 from pathlib import Path
 
-from agentguard import AgentIdentity, AuditLog, GuardedTool, PermissionPolicy
+from aegize import AgentIdentity, AuditLog, GuardedTool, PermissionPolicy
 
 HERE = Path(__file__).parent
 
@@ -24,7 +24,7 @@ def main() -> None:
         owner="Geoffrey",
         environment="dev",
     )
-    policy = PermissionPolicy.from_yaml(HERE / "agentguard.yaml")
+    policy = PermissionPolicy.from_yaml(HERE / "aegize.yaml")
     audit = AuditLog(HERE / "audit.jsonl")
 
     safe_web_search = GuardedTool(

@@ -10,7 +10,7 @@ block and call decorated tools directly.
 
 from pathlib import Path
 
-from agentguard import (
+from aegize import (
     AgentIdentity,
     ApprovalRequired,
     AuditLog,
@@ -46,7 +46,7 @@ def main() -> None:
         owner="Geoffrey",
         environment="dev",
     )
-    policy = PermissionPolicy.from_yaml(HERE / "agentguard.yaml")
+    policy = PermissionPolicy.from_yaml(HERE / "aegize.yaml")
     audit = AuditLog(HERE / "audit.jsonl")
     ctx = GuardContext(agent=agent, policy=policy, audit_log=audit)
 

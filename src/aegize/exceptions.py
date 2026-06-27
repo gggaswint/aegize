@@ -1,6 +1,6 @@
-"""Exception hierarchy for AgentGuard.
+"""Exception hierarchy for Aegize.
 
-All AgentGuard errors derive from :class:`AgentGuardError`, so callers can catch
+All Aegize errors derive from :class:`AegizeError`, so callers can catch
 the whole family with a single ``except`` clause while still being able to
 distinguish a hard policy denial from an approval gate.
 """
@@ -13,15 +13,15 @@ if TYPE_CHECKING:  # pragma: no cover - typing only
     from .action import ToolAction
 
 
-class AgentGuardError(Exception):
-    """Base class for every error raised by AgentGuard."""
+class AegizeError(Exception):
+    """Base class for every error raised by Aegize."""
 
 
-class PolicyLoadError(AgentGuardError):
+class PolicyLoadError(AegizeError):
     """Raised when a policy file cannot be read, parsed, or validated."""
 
 
-class _DecisionError(AgentGuardError):
+class _DecisionError(AegizeError):
     """Shared base for errors that carry the offending action and a reason."""
 
     def __init__(

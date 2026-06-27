@@ -6,8 +6,8 @@ import inspect
 
 import pytest
 
-from agentguard import (
-    AgentGuardError,
+from aegize import (
+    AegizeError,
     ApprovalRequired,
     GuardContext,
     PolicyDenied,
@@ -118,12 +118,12 @@ def test_call_without_context_raises(ctx):
     def web_search(query: str) -> str:
         return query
 
-    with pytest.raises(AgentGuardError):
+    with pytest.raises(AegizeError):
         web_search("no context bound")
 
 
 def test_with_block_restores_previous_default(agent, policy, audit):
-    from agentguard import get_default_context
+    from aegize import get_default_context
 
     outer = GuardContext(agent=agent, policy=policy, audit_log=audit).activate()
     inner = GuardContext(agent=agent, policy=policy, audit_log=audit)

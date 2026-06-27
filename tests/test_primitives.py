@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from agentguard import AgentIdentity, AuditLog, ToolAction
+from aegize import AgentIdentity, AuditLog, ToolAction
 
 
 def test_agent_identity_defaults():

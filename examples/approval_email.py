@@ -2,13 +2,13 @@
 
     python examples/approval_email.py
 
-`email` / `send` is configured as `require_approval`. AgentGuard raises
+`email` / `send` is configured as `require_approval`. Aegize raises
 `ApprovalRequired` and the underlying function is never executed.
 """
 
 from pathlib import Path
 
-from agentguard import AgentIdentity, ApprovalRequired, AuditLog, GuardedTool, PermissionPolicy
+from aegize import AgentIdentity, ApprovalRequired, AuditLog, GuardedTool, PermissionPolicy
 
 HERE = Path(__file__).parent
 
@@ -25,7 +25,7 @@ def main() -> None:
         owner="Geoffrey",
         environment="dev",
     )
-    policy = PermissionPolicy.from_yaml(HERE / "agentguard.yaml")
+    policy = PermissionPolicy.from_yaml(HERE / "aegize.yaml")
     audit = AuditLog(HERE / "audit.jsonl")
 
     guarded_email = GuardedTool(

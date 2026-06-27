@@ -1,4 +1,4 @@
-# AgentGuard policy.
+# Aegize policy.
 #
 # Evaluation order per action: deny -> require_approval -> allow -> default-deny.
 # Anything not explicitly allowed is denied.

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from agentguard import ApprovalRequired, GuardedTool, PolicyDenied
+from aegize import ApprovalRequired, GuardedTool, PolicyDenied
 
 
 def _calls(record):
@@ -139,7 +139,7 @@ def test_audit_written_for_every_outcome(agent, policy, audit):
 
 
 def test_unknown_agent_defaults_to_deny(policy, audit):
-    from agentguard import AgentIdentity
+    from aegize import AgentIdentity
 
     stranger = AgentIdentity(agent_id="stranger", name="X", owner="nobody")
     record = {}

@@ -1,24 +1,28 @@
-# AgentGuard
+# Aegize
 
-**A policy and audit layer for AI agents. It makes tool use explicit, permissioned, and observable.**
+**Infrastructure for autonomous AI agents.**
 
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Status](https://img.shields.io/badge/status-alpha-orange.svg)](#roadmap)
 [![Version](https://img.shields.io/badge/version-0.2.0-blueviolet.svg)](#roadmap)
 
-AgentGuard is a drop-in Python SDK that sits between your AI agent and the tools
-it can call. An agent cannot touch a tool unless the action passes through
-AgentGuard first — where it is given an identity, checked against policy, gated
-for approval if needed, and written to an append-only audit log.
+Aegize is the runtime governance layer between an autonomous agent and the tools
+it acts through. Every tool call is given an **identity**, evaluated against
+**policy**, granted or refused **permission**, gated for **approval** when it
+matters, and written to an append-only **audit** log — before it runs.
 
-> Every AI tool call must have identity, permission, policy enforcement, and audit logging.
+These are the controls you already require of human operators and service
+accounts. Aegize applies them to agents, as infrastructure: declarative,
+deterministic, and observable.
+
+> Every agent action must have identity, permission, policy enforcement, and audit.
 
 ---
 
 ## See it in action
 
-One agent attempts three tool calls. AgentGuard **allows** the web search,
+One agent attempts three tool calls. Aegize **allows** the web search,
 **holds the email for approval**, **blocks the shell command**, and writes an
 audit record for every attempt.
 
@@ -50,53 +54,56 @@ The gated and denied calls never reach the underlying functions. See
 
 ## Why this exists
 
-AI agents are wired up to real tools: shells, email, payments, file systems,
-internal APIs. The model decides what to call and with what arguments — which
-makes the model itself the security boundary. That boundary is non-deterministic,
-hard to audit, and one crafted input away from doing something you didn't intend.
+Autonomous agents now take real actions: they run shells, send email, move
+money, read and write files, and call internal APIs. The moment an agent can
+*act*, it needs the same operational controls every other actor in your stack
+already has — an identity, scoped permissions, approvals for high-impact
+actions, and an audit trail. Today that layer is usually missing, and the
+model's own judgment stands in for it.
 
-AgentGuard moves the trust boundary out of the model and into code you control:
+Aegize is that missing layer. It governs agent actions at runtime:
 
-- **Permission is explicit.** Every tool call is checked against policy you
-  write, not behavior you hope for.
-- **Sensitive actions get a human.** High-impact operations can require approval
+- **Identity.** Every action is attributed to a named agent and environment.
+- **Policy & permissions.** What each agent may do is declared in YAML, lives in
+  version control, and is enforced deterministically on every call.
+- **Approval workflows.** High-impact actions can require a human in the loop
   instead of running automatically.
-- **Everything is on the record.** Each attempt — allowed, denied, gated, or
-  failed — is written to an append-only audit log.
+- **Audit.** Every attempt — and its outcome — is written to an append-only log.
 
-Policy is declared in YAML, lives in version control, and is enforced the same
-way every time. The default is **deny**: if nothing explicitly allows an action,
-it does not run.
+The default is **deny**: if nothing explicitly allows an action, it does not
+run. Security is one outcome of this; operability, reviewability, and control
+are the rest.
 
-## What you get in v0.1
+## What Aegize provides
 
-- **`AgentIdentity`** — every action is attributed to a named agent.
-- **`PermissionPolicy`** — YAML policy engine returning `allow`, `deny`, or
+- **`AgentIdentity`** — a durable identity for each agent (owner, environment,
+  metadata).
+- **`PermissionPolicy`** — a YAML policy engine that returns `allow`, `deny`, or
   `require_approval`.
-- **`GuardedTool`** — wrap any callable so it is permissioned, gated, and
-  audited.
-- **`AuditLog`** — append-only JSONL record of every attempt and outcome.
+- **`GuardedTool` / `@guarded_tool`** — the enforcement point: wrap any callable
+  so it is identified, permissioned, gated, and audited.
+- **`AuditLog`** — an append-only JSONL record of every attempt and outcome.
 - **Typed, dependency-light, and easy to extend.** One runtime dependency
   (PyYAML).
 
 ## Install
 
 ```bash
-pip install agentguard
+pip install aegize
 ```
 
 Or from source:
 
 ```bash
-git clone https://github.com/gggaswint/agentguard
-cd agentguard
+git clone https://github.com/gggaswint/aegize
+cd aegize
 pip install -e ".[dev]"
 ```
 
 ## Quickstart
 
 ```python
-from agentguard import AgentIdentity, PermissionPolicy, GuardedTool, AuditLog
+from aegize import AgentIdentity, PermissionPolicy, GuardedTool, AuditLog
 
 agent = AgentIdentity(
     agent_id="research_bot",
@@ -105,7 +112,7 @@ agent = AgentIdentity(
     environment="dev",
 )
 
-policy = PermissionPolicy.from_yaml("agentguard.yaml")
+policy = PermissionPolicy.from_yaml("aegize.yaml")
 audit = AuditLog("audit.jsonl")
 
 def web_search(query: str) -> str:
@@ -125,11 +132,11 @@ result = safe_web_search("AI safety companies")
 ```
 
 If the policy allows the action, the function runs and two audit records are
-written (authorization + result). If not, AgentGuard raises `PolicyDenied` or
+written (authorization + result). If not, Aegize raises `PolicyDenied` or
 `ApprovalRequired` and the function never executes.
 
 ```python
-from agentguard import PolicyDenied, ApprovalRequired
+from aegize import PolicyDenied, ApprovalRequired
 
 try:
     safe_web_search("AI safety companies")
@@ -148,7 +155,7 @@ You don't have to wrap every function by hand. Declare a tool once with
 them together when you have a context.
 
 ```python
-from agentguard import (
+from aegize import (
     AgentIdentity, PermissionPolicy, AuditLog,
     GuardContext, guarded_tool, guard, ApprovalRequired,
 )
@@ -159,7 +166,7 @@ def send_email(to: str, body: str) -> str:
 
 ctx = GuardContext(
     agent=AgentIdentity(agent_id="research_bot", name="Research Bot", owner="Geoffrey"),
-    policy=PermissionPolicy.from_yaml("agentguard.yaml"),
+    policy=PermissionPolicy.from_yaml("aegize.yaml"),
     audit_log=AuditLog("audit.jsonl"),
 )
 
@@ -237,7 +244,7 @@ Rule fields:
 | `risk_level_max` | `allow`                 | Highest risk this rule permits (`low`…`critical`).                |
 | `paths`          | `allow`                 | Glob allowlist; a string argument must match one of these.        |
 
-> **Path matching:** when a rule has `paths`, AgentGuard checks the string
+> **Path matching:** when a rule has `paths`, Aegize checks the string
 > arguments of the call (and `metadata["path"]`) against the glob patterns. A
 > call with no matching path is denied.
 
@@ -284,19 +291,19 @@ python examples/decorator_usage.py  # @guarded_tool + GuardContext (v0.2)
 python examples/demo_story.py       # the full allow / approve / deny story
 ```
 
-## Security posture
+## Enforcement guarantees
 
 - **Default deny.** No matching `allow` rule means the action is denied.
 - **Deny wins.** An explicit `deny` overrides `require_approval` and `allow`.
 - **Gated actions never execute.** `deny` and `require_approval` raise before
   the wrapped function is called.
-- **Audit-first.** The decision is logged before any execution is attempted;
-  the result is logged after.
+- **Audit-first.** The decision is recorded before any execution is attempted;
+  the result is recorded after.
 
 ## Roadmap
 
 - ~~`@guarded_tool` decorator + `GuardContext` ergonomics.~~ ✅ v0.2
-- Policy schema validation and a `agentguard lint` CLI.
+- Policy schema validation and a `aegize lint` CLI.
 - First-class adapters for popular agent frameworks (a thin MCP registration
   helper on top of the v0.2 `guard()` callable).
 - Pluggable approval backends (Slack, webhook, queue) for `require_approval`.
@@ -322,11 +329,12 @@ Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the dev
 setup, the project's scope and design principles, and the bar for a mergeable
 change.
 
-## Security
+## Reporting vulnerabilities
 
-AgentGuard is a security tool; we take issues in it seriously. Please report
-vulnerabilities privately — see [SECURITY.md](./SECURITY.md). Do not open a
-public issue for a suspected vulnerability.
+Aegize governs what agents are allowed to do, so we treat weaknesses in it
+seriously. Please report vulnerabilities privately — see
+[SECURITY.md](./SECURITY.md). Do not open a public issue for a suspected
+vulnerability.
 
 ## License
 

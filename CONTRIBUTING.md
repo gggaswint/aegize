@@ -1,12 +1,12 @@
-# Contributing to AgentGuard
+# Contributing to Aegize
 
-Thanks for your interest in improving AgentGuard. It's a small, focused
-project and we'd like to keep it that way: a clean policy and audit layer that
-teams can read in an afternoon and trust in production.
+Thanks for your interest in improving Aegize. It's a small, focused
+project and we'd like to keep it that way: clean runtime-governance
+infrastructure that teams can read in an afternoon and trust in production.
 
 ## Project scope and principles
 
-AgentGuard deliberately stays small. Before proposing a change, it helps to know
+Aegize deliberately stays small. Before proposing a change, it helps to know
 what we optimize for:
 
 - **Default deny, always.** Anything not explicitly allowed is denied. Changes
@@ -24,8 +24,8 @@ open an issue first so we can agree on the approach before you write code.
 ## Development setup
 
 ```bash
-git clone https://github.com/gggaswint/agentguard
-cd agentguard
+git clone https://github.com/gggaswint/aegize
+cd aegize
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 ```
@@ -48,7 +48,7 @@ A change is ready to review when:
    never execute the wrapped function, and every attempt must be audited. If a
    change touches enforcement, call that out explicitly in the PR description.
 4. **Public API changes are intentional.** If you add or change something in
-   `agentguard/__init__.py`, update the README and note it in the PR.
+   `aegize/__init__.py`, update the README and note it in the PR.
 5. **Type hints are present** on new public functions and classes.
 
 ## Commit and PR style

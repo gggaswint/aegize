@@ -1,7 +1,8 @@
-"""AgentGuard: a policy and audit layer for AI agents.
+"""Aegize: infrastructure for autonomous AI agents.
 
-It makes tool use explicit, permissioned, and observable. Every guarded tool
-call carries identity, is checked against policy, and is written to an
+Aegize provides the runtime governance layer between an agent and its tools:
+identity, policy, permissions, approval workflows, and audit. Every tool call
+carries an identity, is evaluated against policy, and is written to an
 append-only audit log before it is allowed to run.
 """
 
@@ -17,7 +18,7 @@ from .context import (
 )
 from .decorators import GuardedFunction, GuardSpec, guard, guarded_tool
 from .exceptions import (
-    AgentGuardError,
+    AegizeError,
     ApprovalRequired,
     PolicyDenied,
     PolicyLoadError,
@@ -51,7 +52,7 @@ __all__ = [
     "get_default_context",
     "clear_default_context",
     # exceptions
-    "AgentGuardError",
+    "AegizeError",
     "PolicyDenied",
     "ApprovalRequired",
     "PolicyLoadError",

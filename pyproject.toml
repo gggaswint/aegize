@@ -3,14 +3,25 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "agentguard"
+name = "aegize"
 version = "0.2.0"
-description = "A policy, permission, approval, and audit layer for AI agents."
+description = "Infrastructure for autonomous AI agents: identity, policy, permissions, approval workflows, and audit."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Geoffrey", email = "ggaswint@gmail.com" }]
-keywords = ["ai", "agents", "llm", "policy", "security", "audit", "permissions", "guardrails"]
+keywords = [
+  "ai",
+  "agents",
+  "llm",
+  "infrastructure",
+  "governance",
+  "identity",
+  "policy",
+  "permissions",
+  "approval",
+  "audit",
+]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -20,8 +31,9 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Topic :: Security",
   "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: System :: Systems Administration",
+  "Topic :: Security",
 ]
 dependencies = ["PyYAML>=6.0"]
 
@@ -29,12 +41,12 @@ dependencies = ["PyYAML>=6.0"]
 dev = ["pytest>=7.0", "ruff>=0.1"]
 
 [project.urls]
-Homepage = "https://github.com/gggaswint/agentguard"
-Repository = "https://github.com/gggaswint/agentguard"
-Issues = "https://github.com/gggaswint/agentguard/issues"
+Homepage = "https://github.com/gggaswint/aegize"
+Repository = "https://github.com/gggaswint/aegize"
+Issues = "https://github.com/gggaswint/aegize/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/agentguard"]
+packages = ["src/aegize"]
 
 [tool.ruff]
 line-length = 100

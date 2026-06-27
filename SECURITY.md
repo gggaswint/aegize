@@ -1,12 +1,13 @@
 # Security Policy
 
-AgentGuard is a policy and audit layer used to constrain what AI agents can do.
-A vulnerability in it can translate directly into an agent doing something it
-should not. We take that seriously and appreciate reports from the community.
+Aegize is runtime governance infrastructure for autonomous AI agents — it
+decides what an agent is allowed to do. A vulnerability in it can translate
+directly into an agent doing something it should not. We take that seriously and
+appreciate reports from the community.
 
 ## Supported versions
 
-AgentGuard is pre-1.0 and under active development. Security fixes are applied to
+Aegize is pre-1.0 and under active development. Security fixes are applied to
 the latest released version on the `main` branch. Please make sure you can
 reproduce an issue against the latest version before reporting.
 
@@ -25,7 +26,7 @@ Use either of these channels:
 - **GitHub Security Advisories** (preferred): open a private report via the
   repository's **Security → Report a vulnerability** tab. This keeps the
   discussion private until a fix is ready.
-- **Email:** ggaswint@gmail.com with the subject line `AgentGuard security`.
+- **Email:** ggaswint@gmail.com with the subject line `Aegize security`.
 
 To help us triage quickly, please include:
 
@@ -33,7 +34,7 @@ To help us triage quickly, please include:
   misbehaving agent achieve?).
 - A minimal reproduction: the relevant policy, the tool call, and the observed
   behavior.
-- The AgentGuard version and Python version.
+- The Aegize version and Python version.
 - Any suggested remediation, if you have one.
 
 ## What to expect
@@ -63,8 +64,8 @@ Examples of issues we consider security-relevant:
 Out of scope:
 
 - Vulnerabilities in your own tool implementations or in how you write your
-  policy. AgentGuard enforces the policy you give it; it cannot make an
+  policy. Aegize enforces the policy you give it; it cannot make an
   intentionally permissive policy safe.
 - Issues requiring a trusted operator to deliberately misconfigure the system.
 
-Thank you for helping keep AgentGuard and its users safe.
+Thank you for helping keep Aegize and its users safe.

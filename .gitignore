@@ -13,7 +13,7 @@ venv/
 .ruff_cache/
 .mypy_cache/
 
-# AgentGuard runtime artifacts
+# Aegize runtime artifacts
 audit.jsonl
 examples/audit.jsonl
 examples/demo_audit.jsonl

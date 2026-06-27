@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from .context import GuardContext, get_default_context
-from .exceptions import AgentGuardError
+from .exceptions import AegizeError
 from .guarded_tool import GuardedTool
 
 
@@ -72,7 +72,7 @@ class GuardedFunction:
     def _resolve_context(self) -> GuardContext:
         context = self.context or get_default_context()
         if context is None:
-            raise AgentGuardError(
+            raise AegizeError(
                 "no GuardContext is active for this guarded tool; bind one with "
                 "guard(fn, context=...), enter a `with context:` block, or install "
                 "a default via context.activate()"
@@ -90,7 +90,7 @@ def guarded_tool(
     risk_level: str = "low",
     metadata: dict[str, Any] | None = None,
 ) -> Callable[[Callable[..., Any]], GuardedFunction]:
-    """Decorator that tags a function with its AgentGuard policy coordinates."""
+    """Decorator that tags a function with its Aegize policy coordinates."""
 
     def decorator(func: Callable[..., Any]) -> GuardedFunction:
         spec = GuardSpec(
@@ -122,7 +122,7 @@ def guard(
 
     resolved = context or fn.context or get_default_context()
     if resolved is None:
-        raise AgentGuardError(
+        raise AegizeError(
             "guard() requires a GuardContext; pass context=... or install a "
             "default via context.activate()"
         )

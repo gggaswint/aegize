@@ -1,8 +1,8 @@
-"""AgentGuard demo: one agent, three tool calls, three outcomes.
+"""Aegize demo: one agent, three tool calls, three outcomes.
 
     python examples/demo_story.py
 
-An AI agent attempts three tool calls. AgentGuard:
+An AI agent attempts three tool calls. Aegize:
 
   * ALLOWS   a web search,
   * REQUIRES APPROVAL for sending email,
@@ -14,7 +14,7 @@ gated and denied calls never run.
 
 from pathlib import Path
 
-from agentguard import (
+from aegize import (
     AgentIdentity,
     ApprovalRequired,
     AuditLog,
@@ -26,6 +26,14 @@ from agentguard import (
 HERE = Path(__file__).parent
 POLICY_PATH = HERE / "demo_policy.yaml"
 AUDIT_PATH = HERE / "demo_audit.jsonl"
+
+
+def _display_path(path: Path) -> str:
+    """Show the path relative to the working directory when possible."""
+    try:
+        return str(path.resolve().relative_to(Path.cwd()))
+    except ValueError:
+        return str(path)
 
 
 # --- the agent's tools (plain functions) ------------------------------------
@@ -84,9 +92,9 @@ def main() -> None:
             risk_level=risk_level,
         )
 
-    print("AgentGuard demo — agent 'demo_agent' (prod) attempts three tool calls")
-    print(f"Policy:    {POLICY_PATH}")
-    print(f"Audit log: {AUDIT_PATH.resolve()}")
+    print("Aegize demo — agent 'demo_agent' (prod) attempts three tool calls")
+    print(f"Policy:    {_display_path(POLICY_PATH)}")
+    print(f"Audit log: {_display_path(AUDIT_PATH)}")
     print()
 
     attempt(1, "web_search.search   query='AI safety companies'",
@@ -115,7 +123,7 @@ def main() -> None:
         f"3 actions attempted · {allowed} allowed · {approval} awaiting approval · "
         f"{denied} denied · {len(records)} audit records written"
     )
-    print(f"Full audit log: {AUDIT_PATH.resolve()}")
+    print(f"Full audit log: {_display_path(AUDIT_PATH)}")
 
 
 if __name__ == "__main__":

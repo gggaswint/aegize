@@ -1,4 +1,4 @@
-# Policy for the AgentGuard demo (examples/demo_story.py).
+# Policy for the Aegize demo (examples/demo_story.py).
 #
 # One agent, three tools, three outcomes:
 #   web_search / search   -> allow
