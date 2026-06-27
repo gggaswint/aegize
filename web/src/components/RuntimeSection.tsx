@@ -1,5 +1,5 @@
+import { HeroPipeline } from "./HeroPipeline";
 import { Reveal } from "./Reveal";
-import { RuntimePipeline } from "./RuntimePipeline";
 
 const VERDICTS = [
   { call: "web_search", verdict: "allowed", color: "var(--color-allow)" },
@@ -45,7 +45,7 @@ export function RuntimeSection() {
         </Reveal>
 
         <Reveal delay={120}>
-          <RuntimePipeline />
+          <HeroPipeline />
         </Reveal>
       </div>
     </section>

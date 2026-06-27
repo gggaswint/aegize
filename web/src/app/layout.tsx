@@ -56,8 +56,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`no-js ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-sans antialiased">
+        {/* Mark JS as available before paint so scroll-reveal content is hidden
+            only when we can actually animate it in. No JS -> content stays visible. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');",
+          }}
+        />
         <div className="bg-atmosphere" aria-hidden="true" />
         <a
           href="#main"

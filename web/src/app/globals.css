@@ -103,7 +103,13 @@
 /* ---------------------------------------------------------------------------
    Scroll reveal
 --------------------------------------------------------------------------- */
+/* Visible by default (works with no JavaScript). Only hidden-then-revealed
+   when JS is present to animate it in. */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+html.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition:
@@ -111,7 +117,7 @@
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -164,7 +170,8 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal {
+  .reveal,
+  html.js .reveal {
     opacity: 1;
     transform: none;
   }
