@@ -1,20 +1,18 @@
 # Aegize
 
-**Infrastructure for autonomous AI agents.**
+Infrastructure for autonomous AI agents.
+
+**[Website](https://aegize.com)** • **[GitHub](https://github.com/gggaswint/aegize)**
 
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Status](https://img.shields.io/badge/status-alpha-orange.svg)](#roadmap)
 [![Version](https://img.shields.io/badge/version-0.2.0-blueviolet.svg)](#roadmap)
 
-Aegize is the runtime governance layer between an autonomous agent and the tools
-it acts through. Every tool call is given an **identity**, evaluated against
-**policy**, granted or refused **permission**, gated for **approval** when it
-matters, and written to an append-only **audit** log — before it runs.
+Aegize is the runtime layer between autonomous AI agents and the tools they use.
 
-These are the controls you already require of human operators and service
-accounts. Aegize applies them to agents, as infrastructure: declarative,
-deterministic, and observable.
+It provides identity, policy enforcement, permissions, approval workflows, audit
+logging, observability, and runtime governance for every AI action.
 
 > Every agent action must have identity, permission, policy enforcement, and audit.
 
@@ -52,27 +50,24 @@ Audit trail:
 The gated and denied calls never reach the underlying functions. See
 [Demo](#demo) to run it yourself.
 
-## Why this exists
+## Why Aegize?
 
-Autonomous agents now take real actions: they run shells, send email, move
-money, read and write files, and call internal APIs. The moment an agent can
-*act*, it needs the same operational controls every other actor in your stack
-already has — an identity, scoped permissions, approvals for high-impact
-actions, and an audit trail. Today that layer is usually missing, and the
-model's own judgment stands in for it.
+AI systems are moving from answering questions to taking actions — running
+shells, sending email, moving money, calling internal APIs. A model that only
+returns text is easy to contain. An agent that *acts* is not: it needs an
+identity, scoped permissions, approvals for high-impact operations, and a record
+of everything it did.
 
-Aegize is that missing layer. It governs agent actions at runtime:
+That governance layer is usually missing today, and the model's own judgment
+stands in for it. Aegize is the runtime infrastructure that fills the gap, so
+organizations can let agents take actions without giving up control or
+visibility. Security is one capability this provides; operability, reviewability,
+and confidence in deployment are the rest.
 
-- **Identity.** Every action is attributed to a named agent and environment.
-- **Policy & permissions.** What each agent may do is declared in YAML, lives in
-  version control, and is enforced deterministically on every call.
-- **Approval workflows.** High-impact actions can require a human in the loop
-  instead of running automatically.
-- **Audit.** Every attempt — and its outcome — is written to an append-only log.
+## Project Vision
 
-The default is **deny**: if nothing explicitly allows an action, it does not
-run. Security is one outcome of this; operability, reviewability, and control
-are the rest.
+> Every meaningful AI action should pass through trusted runtime infrastructure
+> before reaching the outside world.
 
 ## What Aegize provides
 
