@@ -6,6 +6,16 @@ question](../docs/questions.md) and a recorded [decision](../docs/decisions.md):
 a place to think a change through in writing before building it, and a durable
 record of *why* once it ships.
 
+## Index
+
+| RFC | Title | Status |
+| --- | ----- | ------ |
+| [0001](./0001-agent-identity.md) | Agent Identity | Draft |
+| [0002](./0002-policy-engine.md) | Policy Engine | Draft |
+| [0003](./0003-audit-format.md) | Audit Format | Draft |
+| [0004](./0004-approval-workflow.md) | Approval Workflow | Draft |
+| [0005](./0005-runtime-governance.md) | Runtime Governance | Draft |
+
 ## What RFCs are for
 
 An RFC captures a proposed change, the reasoning behind it, the alternatives
