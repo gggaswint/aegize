@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Aegize design tokens
+   Refined precision-minimalism: deep near-black canvas, one confident blue
+   accent, and the green/amber/red verdict colours carried over from the
+   runtime demo. Prose in a grotesque; everything "system" in mono.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-bg: #07090e;
+  --color-surface: #0d1117;
+  --color-surface-2: #11161f;
+  --color-border: #1b2230;
+  --color-border-strong: #283042;
+  --color-fg: #e9eef5;
+  --color-muted: #8b97a8;
+  --color-faint: #5a6478;
+
+  --color-accent: #5b9dff;
+  --color-accent-soft: #1f2c45;
+  --color-allow: #46c25a;
+  --color-approval: #e0a93b;
+  --color-deny: #f0685f;
+
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jbmono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --shadow-glow: 0 0 0 1px rgba(91, 157, 255, 0.18), 0 8px 40px -12px rgba(91, 157, 255, 0.25);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    background: rgba(91, 157, 255, 0.28);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 999px;
+    border: 3px solid var(--color-bg);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Atmosphere: a fixed background of faint grid + a soft accent glow up top.
+--------------------------------------------------------------------------- */
+.bg-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 50% -8%, rgba(91, 157, 255, 0.14), transparent 70%),
+    radial-gradient(700px 600px at 88% 8%, rgba(91, 157, 255, 0.05), transparent 70%);
+}
+
+.bg-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, #000 30%, transparent 80%);
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal
+--------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* hero load stagger */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* pipeline pulse breathing */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.95;
+  }
+  50% {
+    box-shadow: 0 0 18px 3px currentColor;
+    opacity: 1;
+  }
+}
+
+.hairline {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border-strong) 18%,
+    var(--color-border-strong) 82%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .rise {
+    opacity: 1;
+  }
+}
