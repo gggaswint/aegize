@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/logo-512.png" alt="Aegize" width="360">
+</p>
+
 # Aegize
 
 Infrastructure for autonomous AI agents.
