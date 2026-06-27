@@ -1,0 +1,26 @@
+# AgentGuard policy.
+#
+# Evaluation order per action: deny -> require_approval -> allow -> default-deny.
+# Anything not explicitly allowed is denied.
+agents:
+  research_bot:
+    allow:
+      - tool: web_search
+        operations: ["search"]
+        risk_level_max: medium
+      - tool: file_reader
+        operations: ["read"]
+        paths:
+          - "./safe_data/**"
+
+    require_approval:
+      - tool: email
+        operations: ["send"]
+      - tool: shell
+        operations: ["execute"]
+
+    deny:
+      - tool: payments
+        operations: ["charge"]
+      - tool: shell
+        operations: ["rm", "delete"]

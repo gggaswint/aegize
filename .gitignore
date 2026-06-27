@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# AgentGuard runtime artifacts
+audit.jsonl
+examples/audit.jsonl
+
+# OS
+.DS_Store
+
+# Local tooling / editor
+.claude/
+.idea/
+.vscode/
