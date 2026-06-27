@@ -311,14 +311,27 @@ python examples/demo_story.py       # the full allow / approve / deny story
 
 ## Project documents
 
-The founding documents for Aegize — useful for contributors and for understanding
-where the project is headed:
+The operating documents for Aegize — useful for contributors and for
+understanding where the project is headed.
+
+**Direction**
 
 - [Vision](./docs/vision.md) — the thesis, the problem, and the long-term ambition.
 - [Roadmap](./docs/roadmap.md) — from the current SDK to runtime governance.
 - [Architecture](./docs/architecture.md) — primitives, runtime flow, and trust model.
+
+**Operating**
+
+- [Principles](./docs/principles.md) — the engineering and product tie-breakers.
+- [Anti-goals](./docs/anti-goals.md) — what Aegize is deliberately not.
 - [Brand](./docs/brand.md) — positioning, messaging, and visual language.
+
+**Process & record**
+
 - [Decisions](./docs/decisions.md) — the record of why things are the way they are.
+- [Open questions](./docs/questions.md) — unresolved product and architecture questions.
+- [RFCs](./rfcs/README.md) — how significant changes are proposed and recorded.
+- [CLAUDE.md](./CLAUDE.md) — operating instructions for AI coding sessions.
 
 ## Roadmap
 
