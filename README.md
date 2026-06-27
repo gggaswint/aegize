@@ -20,6 +20,10 @@ logging, observability, and runtime governance for every AI action.
 
 > Every agent action must have identity, permission, policy enforcement, and audit.
 
+<p align="center">
+  <img src="./assets/demo.gif" alt="Aegize demo: an agent makes three tool calls — web search allowed, email approval required, shell command denied — each governed and audited by Aegize" width="1000">
+</p>
+
 ---
 
 ## See it in action
