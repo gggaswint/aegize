@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Aegize — How Aegize Fits Into an AI Agent Stack
+  Hand-crafted, flat vector. No gradients, no drop shadows, thin strokes.
+  Theme-adaptive: dark by default, light via prefers-color-scheme so it reads
+  well in both GitHub themes. The diagram is self-contained (opaque background),
+  so it is legible even where the media query is not honored.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1086" width="1400" height="1086"
+     role="img" aria-label="How Aegize fits into an AI agent stack. AI frameworks send tool calls down into Aegize. Aegize provides identity, policy engine, permissions, runtime governance, approval workflows, and audit logging. Only allowed actions pass down to tools such as the filesystem, shell, browser, email, database, REST APIs, payment APIs, and cloud infrastructure. Every AI action passes through Aegize before reaching the outside world.">
+
+  <style>
+    :root {
+      --bg:#0d1117; --panel:#11161f; --panelLine:#283042;
+      --ink:#e6edf3; --muted:#8b949e; --line:#2a3140;
+      --chip:#0f141c; --chipLine:#2a3140;
+      --accent:#5b9dff; --aegizeBg:#10182a; --aegizeLine:#34527f;
+      --module:#0d1320; --moduleLine:#26314a;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:#ffffff; --panel:#f6f8fa; --panelLine:#d8dee4;
+        --ink:#1f2328; --muted:#59636e; --line:#d0d7de;
+        --chip:#ffffff; --chipLine:#d0d7de;
+        --accent:#3b6fe0; --aegizeBg:#f3f7ff; --aegizeLine:#bcd0f5;
+        --module:#ffffff; --moduleLine:#dde5f2;
+      }
+    }
+    text { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .bg      { fill: var(--bg); }
+    .panel   { fill: var(--panel);   stroke: var(--panelLine); stroke-width: 1.25; }
+    .aegize  { fill: var(--aegizeBg); stroke: var(--aegizeLine); stroke-width: 1.5; }
+    .module  { fill: var(--module);  stroke: var(--moduleLine); stroke-width: 1.25; }
+    .chip    { fill: var(--chip);    stroke: var(--chipLine);  stroke-width: 1.25; }
+    .ink     { fill: var(--ink); }
+    .muted   { fill: var(--muted); }
+    .accentf { fill: var(--accent); }
+    .eyebrow { fill: var(--muted); letter-spacing: 2px; }
+    .arrow     { stroke: var(--accent); stroke-width: 1.6; fill: none; stroke-linecap: round; }
+    .arrowhead { fill: var(--accent); }
+    .hair      { stroke: var(--line); stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- background -->
+  <rect class="bg" x="0" y="0" width="1400" height="1086"/>
+
+  <!-- ============================ header ============================ -->
+  <g id="header">
+    <text class="mono eyebrow" x="700" y="42" text-anchor="middle" font-size="13">ARCHITECTURE</text>
+    <text class="ink" x="700" y="76" text-anchor="middle" font-size="28" font-weight="600">How Aegize Fits Into an AI Agent Stack</text>
+    <line class="hair" x1="60" y1="96" x2="1340" y2="96"/>
+  </g>
+
+  <!-- ====================== top: AI frameworks ===================== -->
+  <g id="frameworks">
+    <rect class="panel" x="60" y="120" width="1280" height="132" rx="14"/>
+    <text class="mono eyebrow" x="84" y="148" font-size="12">AI FRAMEWORKS</text>
+
+    <g id="framework-chips">
+      <!-- 5 chips, evenly spaced -->
+      <rect class="chip" x="84"   y="168" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="198"  y="202" text-anchor="middle" font-size="14.5">OpenAI Agents SDK</text>
+
+      <rect class="chip" x="334"  y="168" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="448"  y="202" text-anchor="middle" font-size="14.5">LangGraph</text>
+
+      <rect class="chip" x="584"  y="168" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="698"  y="202" text-anchor="middle" font-size="14.5">CrewAI</text>
+
+      <rect class="chip" x="834"  y="168" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="948"  y="202" text-anchor="middle" font-size="14.5">AutoGen</text>
+
+      <rect class="chip" x="1084" y="168" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="1198" y="202" text-anchor="middle" font-size="14.5">Custom Agents</text>
+    </g>
+  </g>
+
+  <!-- frameworks -> Aegize (the only egress from the framework layer) -->
+  <g id="flow-in">
+    <line class="arrow" x1="700" y1="252" x2="700" y2="305"/>
+    <path class="arrowhead" d="M695 305 L705 305 L700 314 Z"/>
+    <text class="mono muted" x="716" y="287" font-size="12.5">tool calls</text>
+  </g>
+
+  <!-- ===================== middle: Aegize ========================== -->
+  <g id="aegize">
+    <rect class="aegize" x="60" y="314" width="1280" height="428" rx="16"/>
+    <text class="ink" x="84" y="362" font-size="26" font-weight="600">Aegize</text>
+    <text class="muted" x="84" y="388" font-size="14.5">Infrastructure for autonomous AI agents</text>
+    <text class="mono eyebrow accentf" x="1316" y="360" text-anchor="end" font-size="12" fill-opacity="0.85">RUNTIME GOVERNANCE</text>
+
+    <!-- six equally sized modules (3 x 2) -->
+    <g id="aegize-modules">
+      <!-- row 1 -->
+      <g id="module-identity">
+        <rect class="module" x="84" y="414" width="394" height="128" rx="12"/>
+        <circle class="accentf" cx="114" cy="456" r="4"/>
+        <text class="ink" x="132" y="461" font-size="17" font-weight="600">Identity</text>
+        <text class="muted" x="114" y="494" font-size="13">Who is acting, and on whose behalf.</text>
+      </g>
+      <g id="module-policy">
+        <rect class="module" x="502" y="414" width="394" height="128" rx="12"/>
+        <circle class="accentf" cx="532" cy="456" r="4"/>
+        <text class="ink" x="550" y="461" font-size="17" font-weight="600">Policy Engine</text>
+        <text class="muted" x="532" y="494" font-size="13">Declarative YAML rules, in version control.</text>
+      </g>
+      <g id="module-permissions">
+        <rect class="module" x="920" y="414" width="394" height="128" rx="12"/>
+        <circle class="accentf" cx="950" cy="456" r="4"/>
+        <text class="ink" x="968" y="461" font-size="17" font-weight="600">Permissions</text>
+        <text class="muted" x="950" y="494" font-size="13">Scoped tools and operations. Default deny.</text>
+      </g>
+      <!-- row 2 -->
+      <g id="module-governance">
+        <rect class="module" x="84" y="562" width="394" height="128" rx="12"/>
+        <circle class="accentf" cx="114" cy="604" r="4"/>
+        <text class="ink" x="132" y="609" font-size="17" font-weight="600">Runtime Governance</text>
+        <text class="muted" x="114" y="642" font-size="13">Deterministic enforcement at the boundary.</text>
+      </g>
+      <g id="module-approval">
+        <rect class="module" x="502" y="562" width="394" height="128" rx="12"/>
+        <circle class="accentf" cx="532" cy="604" r="4"/>
+        <text class="ink" x="550" y="609" font-size="17" font-weight="600">Approval Workflows</text>
+        <text class="muted" x="532" y="642" font-size="13">Hold high-impact actions for a human.</text>
+      </g>
+      <g id="module-audit">
+        <rect class="module" x="920" y="562" width="394" height="128" rx="12"/>
+        <circle class="accentf" cx="950" cy="604" r="4"/>
+        <text class="ink" x="968" y="609" font-size="17" font-weight="600">Audit Logging</text>
+        <text class="muted" x="950" y="642" font-size="13">Append-only record of every action.</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Aegize -> tools (only allowed actions continue) -->
+  <g id="flow-out">
+    <line class="arrow" x1="700" y1="742" x2="700" y2="795"/>
+    <path class="arrowhead" d="M695 795 L705 795 L700 804 Z"/>
+    <text class="mono muted" x="716" y="777" font-size="12.5">allowed actions</text>
+  </g>
+
+  <!-- ====================== bottom: tools ========================== -->
+  <g id="tools">
+    <rect class="panel" x="60" y="804" width="1280" height="212" rx="14"/>
+    <text class="mono eyebrow" x="84" y="832" font-size="12">TOOLS</text>
+
+    <g id="tool-chips">
+      <!-- row 1 -->
+      <rect class="chip" x="84"   y="846" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="229.5"  y="880" text-anchor="middle" font-size="14.5">Filesystem</text>
+
+      <rect class="chip" x="397"  y="846" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="542.5"  y="880" text-anchor="middle" font-size="14.5">Shell</text>
+
+      <rect class="chip" x="710"  y="846" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="855.5"  y="880" text-anchor="middle" font-size="14.5">Browser</text>
+
+      <rect class="chip" x="1023" y="846" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="1168.5" y="880" text-anchor="middle" font-size="14.5">Email</text>
+
+      <!-- row 2 -->
+      <rect class="chip" x="84"   y="922" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="229.5"  y="956" text-anchor="middle" font-size="14.5">Database</text>
+
+      <rect class="chip" x="397"  y="922" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="542.5"  y="956" text-anchor="middle" font-size="14.5">REST APIs</text>
+
+      <rect class="chip" x="710"  y="922" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="855.5"  y="956" text-anchor="middle" font-size="14.5">Payment APIs</text>
+
+      <rect class="chip" x="1023" y="922" width="291" height="58" rx="9"/>
+      <text class="mono ink" x="1168.5" y="956" text-anchor="middle" font-size="14.5">Cloud Infrastructure</text>
+    </g>
+  </g>
+
+  <!-- ========================= caption ============================= -->
+  <text class="ink" x="700" y="1052" text-anchor="middle" font-size="15.5" font-weight="500">Every AI action passes through Aegize before reaching the outside world.</text>
+</svg>
