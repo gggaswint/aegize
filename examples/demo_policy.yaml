@@ -1,0 +1,22 @@
+# Policy for the AgentGuard demo (examples/demo_story.py).
+#
+# One agent, three tools, three outcomes:
+#   web_search / search   -> allow
+#   email      / send     -> require_approval
+#   shell      / execute  -> deny
+#
+# Evaluation order: deny -> require_approval -> allow -> default-deny.
+agents:
+  demo_agent:
+    allow:
+      - tool: web_search
+        operations: ["search"]
+        risk_level_max: medium
+
+    require_approval:
+      - tool: email
+        operations: ["send"]
+
+    deny:
+      - tool: shell
+        operations: ["execute"]

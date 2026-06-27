@@ -16,6 +16,7 @@ venv/
 # AgentGuard runtime artifacts
 audit.jsonl
 examples/audit.jsonl
+examples/demo_audit.jsonl
 
 # OS
 .DS_Store

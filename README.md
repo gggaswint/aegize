@@ -16,23 +16,57 @@ for approval if needed, and written to an append-only audit log.
 
 ---
 
-## Why agents need a policy layer
+## See it in action
 
-AI agents are increasingly wired up to real tools: shells, email, payments,
-file systems, internal APIs. The model decides what to call and with what
-arguments. That is exactly the wrong place to put your security boundary.
+One agent attempts three tool calls. AgentGuard **allows** the web search,
+**holds the email for approval**, **blocks the shell command**, and writes an
+audit record for every attempt.
 
-- **Prompt injection is real.** A malicious web page or document can convince an
-  agent to run `rm -rf`, wire money, or exfiltrate files.
-- **Models are non-deterministic.** "It usually doesn't do that" is not a
-  control.
-- **You need an audit trail.** When something goes wrong, "what did the agent
-  actually try to do?" must have a precise answer.
+```text
+$ python examples/demo_story.py
 
-AgentGuard moves the trust boundary out of the model and into code you control.
-Policy is declared in YAML, lives in version control, and is enforced
-deterministically on every call. The default is **deny**: if nothing explicitly
-allows an action, it does not run.
+[1] web_search.search   query='AI safety companies'
+    ALLOWED  -> results for 'AI safety companies'
+
+[2] email.send          to='ceo@example.com'
+    APPROVAL REQUIRED  -> held for human review (not executed)
+               reason: approval required for tool 'email'
+
+[3] shell.execute       cmd='rm -rf /var/data'
+    DENIED  -> blocked before execution
+               reason: denied by rule for tool 'shell'
+
+Audit trail:
+    allowed              web_search   search
+    execution_succeeded  web_search   search
+    approval_required    email        send
+    denied               shell        execute
+
+3 actions attempted · 1 allowed · 1 awaiting approval · 1 denied · 4 audit records written
+```
+
+The gated and denied calls never reach the underlying functions. See
+[Demo](#demo) to run it yourself.
+
+## Why this exists
+
+AI agents are wired up to real tools: shells, email, payments, file systems,
+internal APIs. The model decides what to call and with what arguments — which
+makes the model itself the security boundary. That boundary is non-deterministic,
+hard to audit, and one crafted input away from doing something you didn't intend.
+
+AgentGuard moves the trust boundary out of the model and into code you control:
+
+- **Permission is explicit.** Every tool call is checked against policy you
+  write, not behavior you hope for.
+- **Sensitive actions get a human.** High-impact operations can require approval
+  instead of running automatically.
+- **Everything is on the record.** Each attempt — allowed, denied, gated, or
+  failed — is written to an append-only audit log.
+
+Policy is declared in YAML, lives in version control, and is enforced the same
+way every time. The default is **deny**: if nothing explicitly allows an action,
+it does not run.
 
 ## What you get in v0.1
 
@@ -209,26 +243,45 @@ Rule fields:
 
 ## Audit log
 
-Every attempt is appended to a JSONL file, one event per line:
+Every attempt is appended to a JSONL file — one self-contained JSON object per
+line, easy to tail, `grep`, or ship to a SIEM. A single allowed call:
 
 ```json
-{"timestamp": "2026-06-27T18:00:00+00:00", "event": "allowed", "action_id": "…", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "input_summary": "'AI safety companies'", "reason": "allowed by rule for tool 'web_search'"}
-{"timestamp": "2026-06-27T18:00:00+00:00", "event": "execution_succeeded", "action_id": "…", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "input_summary": "'AI safety companies'", "result_summary": "'searched: AI safety companies'"}
+{"timestamp": "2026-06-27T18:00:00+00:00", "event": "allowed", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "input_summary": "'AI safety companies'", "reason": "allowed by rule for tool 'web_search'"}
+{"timestamp": "2026-06-27T18:00:00+00:00", "event": "execution_succeeded", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "result_summary": "'searched: AI safety companies'"}
 ```
 
 Events: `allowed`, `denied`, `approval_required`, `execution_succeeded`,
 `execution_failed`. The authorization decision is always written **before** the
-function runs; success/failure is written after.
+function runs; the result is written after. Reading the log back is one call:
+
+```python
+for record in audit.read_all():
+    print(record["event"], record["tool_name"], record["operation"])
+```
+
+## Demo
+
+The 60-second story — one agent, three tool calls, three outcomes, all audited:
+
+```bash
+python examples/demo_story.py
+```
+
+It runs the [`See it in action`](#see-it-in-action) flow above against
+[`examples/demo_policy.yaml`](./examples/demo_policy.yaml) and prints the path to
+the audit log it wrote.
 
 ## Examples
 
-Runnable scripts live in [`examples/`](./examples):
+More runnable scripts live in [`examples/`](./examples):
 
 ```bash
 python examples/basic_allow.py      # allowed web_search runs
 python examples/denied_shell.py     # denied shell command is blocked
 python examples/approval_email.py   # email send raises ApprovalRequired
 python examples/decorator_usage.py  # @guarded_tool + GuardContext (v0.2)
+python examples/demo_story.py       # the full allow / approve / deny story
 ```
 
 ## Security posture
@@ -259,6 +312,21 @@ pip install -e ".[dev]"
 pytest          # run the test suite
 ruff check .    # lint
 ```
+
+CI runs the same `pytest` + `ruff` checks on every push and pull request across
+Python 3.9–3.12.
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the dev
+setup, the project's scope and design principles, and the bar for a mergeable
+change.
+
+## Security
+
+AgentGuard is a security tool; we take issues in it seriously. Please report
+vulnerabilities privately — see [SECURITY.md](./SECURITY.md). Do not open a
+public issue for a suspected vulnerability.
 
 ## License
 
