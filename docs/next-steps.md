@@ -96,7 +96,7 @@ How the ten current priorities sit against this plan:
 | 2 | Finish GitHub profile | `[~]` exists; bio/website/pin remaining |
 | 3 | Finish repo README | `[x]` done |
 | 4 | Add website link | `[x]` README, pyproject, and repo homepage all set |
-| 5 | Add architecture diagram | `[x]` done (`docs/architecture.svg`) |
+| 5 | Add architecture diagram | `[x]` done (`assets/architecture.svg`) |
 | 6 | Add demo GIF | `[x]` done (`assets/demo.gif`) |
 | 7 | Launch aegize.com | `[~]` apex live; `www` pending (today) |
 | 8 | Prepare announcement posts | `[~]` 3 of 5 drafted; finalize this week, publish at launch |

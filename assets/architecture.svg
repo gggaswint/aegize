@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Aegize — canonical architecture diagram.
+  Hand-crafted, flat vector. No gradients, no drop shadows, thin strokes.
+  Theme-adaptive: dark by default, light via prefers-color-scheme, so it reads
+  in both GitHub themes. Self-contained (opaque background) so it stays legible
+  even where the media query is not honored.
+  Grid: content spans x=90..1310, centered on x=700. The two flow arrows are the
+  only path between layers — every action passes through Aegize.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 988" width="1400" height="988"
+     role="img" aria-label="How Aegize fits into an AI agent stack. AI frameworks (OpenAI Agents SDK, LangGraph, CrewAI, AutoGen, custom agents) send tool calls into the Aegize runtime: identity, policy engine, permissions, approval workflows, audit logging, and observability. Only allowed actions pass through to tools — filesystem, shell, browser, email, database, REST APIs, payments, and cloud infrastructure. Every AI action passes through Aegize before reaching the outside world.">
+
+  <style>
+    :root {
+      --bg:#0d1117; --panel:#11161f; --panelLine:#283042;
+      --ink:#e6edf3; --muted:#8b949e;
+      --chip:#0f141c; --chipLine:#2a3140;
+      --accent:#5b9dff; --aegizeBg:#10182a; --aegizeLine:#34527f;
+      --module:#0d1320; --moduleLine:#26314a;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:#ffffff; --panel:#f6f8fa; --panelLine:#d8dee4;
+        --ink:#1f2328; --muted:#59636e;
+        --chip:#ffffff; --chipLine:#d0d7de;
+        --accent:#3b6fe0; --aegizeBg:#f3f7ff; --aegizeLine:#bcd0f5;
+        --module:#ffffff; --moduleLine:#dde5f2;
+      }
+    }
+    text { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .bg      { fill: var(--bg); }
+    .panel   { fill: var(--panel);    stroke: var(--panelLine); stroke-width: 1.25; }
+    .aegize  { fill: var(--aegizeBg); stroke: var(--aegizeLine); stroke-width: 1.5; }
+    .module  { fill: var(--module);   stroke: var(--moduleLine); stroke-width: 1.25; }
+    .chip    { fill: var(--chip);     stroke: var(--chipLine);  stroke-width: 1.25; }
+    .ink     { fill: var(--ink); }
+    .muted   { fill: var(--muted); }
+    .eyebrow { fill: var(--muted); letter-spacing: 2px; }
+    .arrow     { stroke: var(--accent); stroke-width: 1.6; fill: none; stroke-linecap: round; }
+    .arrowhead { fill: var(--accent); }
+  </style>
+
+  <!-- background -->
+  <rect class="bg" x="0" y="0" width="1400" height="988"/>
+
+  <!-- ===================== AI Frameworks ===================== -->
+  <g id="frameworks">
+    <rect class="panel" x="60" y="48" width="1280" height="128" rx="14"/>
+    <text class="mono eyebrow" x="90" y="80" font-size="12">AI FRAMEWORKS</text>
+    <g id="framework-chips">
+      <rect class="chip" x="90"   y="94" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="204"  y="123" text-anchor="middle" dominant-baseline="central" font-size="14.5">OpenAI Agents SDK</text>
+      <rect class="chip" x="338"  y="94" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="452"  y="123" text-anchor="middle" dominant-baseline="central" font-size="14.5">LangGraph</text>
+      <rect class="chip" x="586"  y="94" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="700"  y="123" text-anchor="middle" dominant-baseline="central" font-size="14.5">CrewAI</text>
+      <rect class="chip" x="834"  y="94" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="948"  y="123" text-anchor="middle" dominant-baseline="central" font-size="14.5">AutoGen</text>
+      <rect class="chip" x="1082" y="94" width="228" height="58" rx="9"/>
+      <text class="mono ink" x="1196" y="123" text-anchor="middle" dominant-baseline="central" font-size="14.5">Custom Agents</text>
+    </g>
+  </g>
+
+  <!-- frameworks -> Aegize (the only egress from the framework layer) -->
+  <g id="flow-in">
+    <line class="arrow" x1="700" y1="184" x2="700" y2="231"/>
+    <path class="arrowhead" d="M695 231 L705 231 L700 240 Z"/>
+    <text class="mono muted" x="716" y="212" dominant-baseline="central" font-size="12.5">tool calls</text>
+  </g>
+
+  <!-- ===================== Aegize Runtime ===================== -->
+  <g id="aegize">
+    <rect class="aegize" x="60" y="240" width="1280" height="392" rx="16"/>
+    <text class="ink" x="90" y="286" font-size="26" font-weight="600">Aegize Runtime</text>
+    <text class="muted" x="90" y="311" font-size="14">Infrastructure for autonomous AI agents</text>
+
+    <g id="aegize-modules">
+      <!-- row 1 -->
+      <rect class="module" x="90"  y="344" width="390" height="112" rx="12"/>
+      <text class="ink" x="285"  y="400" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="500">Identity</text>
+      <rect class="module" x="505" y="344" width="390" height="112" rx="12"/>
+      <text class="ink" x="700"  y="400" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="500">Policy Engine</text>
+      <rect class="module" x="920" y="344" width="390" height="112" rx="12"/>
+      <text class="ink" x="1115" y="400" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="500">Permissions</text>
+      <!-- row 2 -->
+      <rect class="module" x="90"  y="472" width="390" height="112" rx="12"/>
+      <text class="ink" x="285"  y="528" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="500">Approval Workflows</text>
+      <rect class="module" x="505" y="472" width="390" height="112" rx="12"/>
+      <text class="ink" x="700"  y="528" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="500">Audit Logging</text>
+      <rect class="module" x="920" y="472" width="390" height="112" rx="12"/>
+      <text class="ink" x="1115" y="528" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="500">Observability</text>
+    </g>
+  </g>
+
+  <!-- Aegize -> tools (only allowed actions continue) -->
+  <g id="flow-out">
+    <line class="arrow" x1="700" y1="640" x2="700" y2="687"/>
+    <path class="arrowhead" d="M695 687 L705 687 L700 696 Z"/>
+    <text class="mono muted" x="716" y="668" dominant-baseline="central" font-size="12.5">allowed actions</text>
+  </g>
+
+  <!-- ===================== Tools ===================== -->
+  <g id="tools">
+    <rect class="panel" x="60" y="696" width="1280" height="216" rx="14"/>
+    <text class="mono eyebrow" x="90" y="728" font-size="12">TOOLS</text>
+    <g id="tool-chips">
+      <!-- row 1 -->
+      <rect class="chip" x="90"   y="740" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="235"  y="769" text-anchor="middle" dominant-baseline="central" font-size="14.5">Filesystem</text>
+      <rect class="chip" x="400"  y="740" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="545"  y="769" text-anchor="middle" dominant-baseline="central" font-size="14.5">Shell</text>
+      <rect class="chip" x="710"  y="740" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="855"  y="769" text-anchor="middle" dominant-baseline="central" font-size="14.5">Browser</text>
+      <rect class="chip" x="1020" y="740" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="1165" y="769" text-anchor="middle" dominant-baseline="central" font-size="14.5">Email</text>
+      <!-- row 2 -->
+      <rect class="chip" x="90"   y="816" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="235"  y="845" text-anchor="middle" dominant-baseline="central" font-size="14.5">Database</text>
+      <rect class="chip" x="400"  y="816" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="545"  y="845" text-anchor="middle" dominant-baseline="central" font-size="14.5">REST APIs</text>
+      <rect class="chip" x="710"  y="816" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="855"  y="845" text-anchor="middle" dominant-baseline="central" font-size="14.5">Payments</text>
+      <rect class="chip" x="1020" y="816" width="290" height="58" rx="9"/>
+      <text class="mono ink" x="1165" y="845" text-anchor="middle" dominant-baseline="central" font-size="14.5">Cloud Infrastructure</text>
+    </g>
+  </g>
+
+  <!-- ===================== Caption ===================== -->
+  <text class="ink" x="700" y="952" text-anchor="middle" dominant-baseline="central" font-size="15.5" font-weight="500">Every AI action passes through Aegize before reaching the outside world.</text>
+</svg>

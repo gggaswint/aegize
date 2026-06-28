@@ -27,7 +27,7 @@ logging, observability, and runtime governance for every AI action.
 ## Architecture
 
 <p align="center">
-  <img src="./docs/architecture.svg" alt="How Aegize fits into an AI agent stack: AI frameworks send tool calls into Aegize (identity, policy engine, permissions, runtime governance, approval workflows, audit logging); only allowed actions reach tools. Every AI action passes through Aegize before reaching the outside world." width="900">
+  <img src="./assets/architecture.svg" alt="How Aegize fits into an AI agent stack: AI frameworks send tool calls into the Aegize runtime (identity, policy engine, permissions, approval workflows, audit logging, observability); only allowed actions reach tools. Every AI action passes through Aegize before reaching the outside world." width="900">
 </p>
 
 ---

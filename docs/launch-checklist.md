@@ -23,7 +23,7 @@ _Status verified: 2026-06-27 (repo state + live endpoint checks)._
 ## GitHub
 
 - [x] README polished — hero, architecture, demo, quickstart, examples, docs links.
-- [x] Architecture SVG — `docs/architecture.svg`, embedded in the README.
+- [x] Architecture SVG — `assets/architecture.svg`, embedded in the README.
 - [x] Demo GIF — `assets/demo.gif`, embedded in the README.
 - [x] Install instructions — `## Install` section in the README.
 - [x] Examples verified — `examples/` scripts run (basic_allow, denied_shell, approval_email, decorator_usage, demo_story).
