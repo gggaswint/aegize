@@ -17,7 +17,7 @@ export function TryTheRuntime() {
         <RuntimeSandbox />
         <div className="mt-6 text-center">
           <a
-            href="/playground"
+            href="/playground/"
             className="inline-flex items-center gap-1.5 font-mono text-sm text-accent transition-opacity hover:opacity-80"
           >
             Open the full playground &rarr;
