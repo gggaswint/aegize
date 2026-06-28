@@ -4,9 +4,9 @@ The complete launch package for Aegize — drafts and checklists, ready for revi
 **Nothing here is published.** Tone throughout: honest, technical, calm,
 developer-first; no hype, no overclaiming. See [brand.md](./brand.md).
 
-Facts to keep accurate: open source (MIT), **v0.2.0**, a Python SDK, **not on
-PyPI yet** (install from source), enforcement + audit work today, the full
-approval *workflow* and observability surface are still ahead.
+Facts to keep accurate: open source (MIT), **v0.2.0**, a Python SDK, **on PyPI**
+(`pip install aegize`), enforcement + audit work today, the full approval
+*workflow* and observability surface are still ahead.
 
 ---
 
@@ -78,8 +78,7 @@ What it does today (v0.2, Python):
   one event per line.
 - `guard()` returns a signature-preserving callable, so it drops into tool
   registries (e.g. MCP).
-- One runtime dependency (PyYAML), typed, tested, MIT. Not on PyPI yet — it's a
-  `pip install -e .` from the repo for now.
+- One runtime dependency (PyYAML), typed, tested, MIT. `pip install aegize`.
 
 What it isn't: not a model, not a prompt guardrail, not an agent framework. It
 governs the action, not the model, so it's vendor-neutral.
@@ -145,8 +144,8 @@ every attempt is written to an append-only JSONL audit log. Default-deny, so
 denied and approval-gated calls never execute.
 
 It's deliberately small: one runtime dependency (PyYAML), fully typed, pytest +
-ruff, MIT. Not on PyPI yet — `pip install -e .` from the repo. I'd love feedback
-on the API shape and the policy model.
+ruff, MIT. `pip install aegize`. I'd love feedback on the API shape and the
+policy model.
 
 Repo: https://github.com/gggaswint/aegize
 
