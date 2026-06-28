@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
 import { OpenSource } from "@/components/OpenSource";
 import { RuntimeSection } from "@/components/RuntimeSection";
+import { TryTheRuntime } from "@/components/TryTheRuntime";
 import { Why } from "@/components/Why";
 
 function Divider() {
@@ -22,6 +23,8 @@ export default function Home() {
         <RuntimeSection />
         <Divider />
         <DemoSection />
+        <Divider />
+        <TryTheRuntime />
         <Divider />
         <Why />
         <Features />

@@ -5,7 +5,7 @@ export const CONTACT_EMAIL = "mailto:hello@aegize.com";
 
 export const NAV_LINKS = [
   { label: "Runtime", href: "#runtime" },
+  { label: "Playground", href: "#try-the-runtime" },
   { label: "Why", href: "#why" },
-  { label: "Features", href: "#features" },
   { label: "Architecture", href: "#architecture" },
 ] as const;

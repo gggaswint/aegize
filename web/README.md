@@ -8,6 +8,22 @@ Built with **Next.js 15** (App Router) · **React 19** · **TypeScript** ·
 (no runtime server), and dependency-light. Animations are CSS-only — no
 animation libraries.
 
+## Runtime sandbox
+
+An interactive, **local-only** simulation of the Aegize runtime. A visitor picks
+a tool and watches the action flow through the pipeline (Identity → Policy →
+Permissions → Approval → Execution → Audit), ending in `Executed`, `Waiting for
+human approval`, or `Blocked by policy`, with an audit entry for every attempt.
+
+It is purely a frontend simulation: **no real shell commands, emails, payments,
+or API calls are executed, and there is no backend.** All state is local.
+
+- On the homepage as the **"Try the runtime"** section (`#try-the-runtime`).
+- As standalone pages at **`/playground`** and **`/sandbox`**.
+- Components live in `src/components/sandbox/` (`RuntimeSandbox`, `ToolButton`,
+  `PipelineStage`, `AuditLog`, `DecisionBadge`); the data model is in
+  `src/lib/sandbox.ts`.
+
 ## Develop
 
 ```bash
