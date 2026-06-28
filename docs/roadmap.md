@@ -62,6 +62,8 @@ Meet agents where they already are:
 - First-class helpers for common agent frameworks via the `guard()` callable.
 - **CLI policy validator** — lint and validate policy files (`aegize` CLI).
 - Policy schema validation with helpful errors.
+- **Policy tests** — assert "agent + action → decision"; the first step of the
+  policy-as-code lifecycle (exploring, [RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md)).
 
 ## v0.4 — Observability
 
@@ -71,6 +73,9 @@ Make agent behavior visible:
 - Structured, queryable event stream.
 - Per-environment policy overlays (`dev` / `staging` / `prod`).
 - Local inspection tooling for reading and filtering audit logs.
+- **Richer decision records** — policy version, normalized arguments, and an
+  optional argument hash, for audits that hold up later (exploring,
+  [RFC 0003](../rfcs/0003-audit-format.md) / [0008](../rfcs/0008-policy-as-code-lifecycle.md)).
 
 ## v1.0 — Runtime governance
 
@@ -78,7 +83,10 @@ The point at which Aegize is a dependable control surface, not just an SDK:
 
 - **Tamper-evident audit logs** (hash-chained / signed records).
 - **Approval workflow** beyond the exception (pluggable backends: webhook,
-  queue, chat) — a real human-in-the-loop path for `require_approval`.
+  queue, chat) — a real human-in-the-loop path for `require_approval`. Explore
+  approval as a **scoped capability grant**: single-use, time-limited, bound to
+  specific arguments/resources, fully audited (exploring,
+  [RFC 0004](../rfcs/0004-approval-workflow.md)).
 - Rate limits and budget/quota controls per agent and per tool.
 - Stable, documented extension points for policy, approval, and audit.
 
@@ -92,6 +100,14 @@ trusted:
 - Organization-level policy and approval queues.
 - Multi-agent governance (agents acting on behalf of other agents).
 - Distributed audit sinks.
+- **Resource-scoped capability model** — permissions scoped to arguments and
+  resources, not just `(tool, operation)` (exploring, [RFC 0006](../rfcs/0006-resource-scoped-permissions.md)).
+- **Policy-as-code lifecycle** — review, staged rollout, and rollback for policy
+  changes (exploring, [RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md)).
+- **Mutating-action safety** — effect / blast-radius classification and dry-run
+  gates for destructive writes (exploring, [RFC 0007](../rfcs/0007-mutating-action-safety.md)).
+- **Richer failure taxonomy** — distinguish policy/tool-unavailable and malformed
+  requests from deny/approval (exploring, [RFC 0005](../rfcs/0005-runtime-governance.md)).
 - A hosted dashboard — **later, not now.**
 
 ## Non-goals

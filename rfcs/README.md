@@ -15,6 +15,9 @@ record of *why* once it ships.
 | [0003](./0003-audit-format.md) | Audit Format | Draft |
 | [0004](./0004-approval-workflow.md) | Approval Workflow | Draft |
 | [0005](./0005-runtime-governance.md) | Runtime Governance | Draft |
+| [0006](./0006-resource-scoped-permissions.md) | Resource-Scoped Permissions (Capability Model) | Draft |
+| [0007](./0007-mutating-action-safety.md) | Mutating-Action Safety | Draft |
+| [0008](./0008-policy-as-code-lifecycle.md) | Policy-as-Code Lifecycle | Draft |
 
 ## What RFCs are for
 

@@ -51,7 +51,9 @@ When an agent spawns or delegates to a sub-agent, or acts on behalf of a user,
 how do permissions flow? Is it strict attenuation (a child can never exceed its
 parent)? Role-based? Does the acting-on-behalf-of principal's scope bound the
 agent's? Inheritance is central to multi-agent governance and is currently
-undefined.
+undefined. A related concern raised by the community: a policy written for
+`research_agent` should **not** silently apply to a delegated sub-agent unless the
+delegation is explicit.
 
 ### What is a capability?
 
@@ -69,7 +71,34 @@ get unwieldy at scale. Do we keep YAML as the authoring format and add schema +
 validation, introduce a typed policy language, or support a programmatic API?
 
 *Current thinking:* keep YAML as the default authoring format and invest in a
-schema validator / linter before considering anything heavier.
+schema validator / linter before considering anything heavier. The operational
+lifecycle (tests, versioning, staged rollout, rollback) is explored in
+[RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md).
+
+### How fine-grained should permissions be?
+
+Tool names are coarse: "can call `send_email`" is not the same as "to whom, with
+what attachment, using which account, in which workspace?" — and likewise for
+shell, databases, cloud, and payments. Should permissions be scoped to normalized
+arguments and resources, not just `(tool, operation)`? Explored in
+[RFC 0006](../rfcs/0006-resource-scoped-permissions.md). *This sharpens "What is a
+capability?" above.*
+
+### How should the decision result model represent failures?
+
+Today the model is `allow` / `deny` / `require_approval`. Agents likely need to
+react differently to *why* an action didn't run: a policy **deny**, an
+**approval_required** gate, **policy_unavailable**, **tool_unavailable**, and a
+**malformed_request** are distinct conditions. What is the right taxonomy, and how
+much of it belongs in the public decision type vs. error handling? (See
+[RFC 0005](../rfcs/0005-runtime-governance.md).)
+
+### How should policies be tested and rolled out safely?
+
+Once teams depend on policy, untested drift is its own risk. How do we let
+operators assert invariants ("agent A can read but not write this table") and ship
+policy changes with review, staging, and rollback? Explored in
+[RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md).
 
 ---
 
@@ -92,6 +121,27 @@ The audit log is append-only JSONL with host-level integrity today. To be
 trustworthy as evidence it should be tamper-evident: hash-chaining, signing, or
 an external anchor. What scheme balances integrity, performance, and the
 local-first, dependency-light principle? How is the chain verified, and by whom?
+
+### What must a decision record contain to be trustworthy?
+
+For audits to hold up later, each allow/deny/approval decision likely needs:
+policy version, agent identity, tool + operation, **normalized arguments**, the
+reason, a timestamp, and possibly an **argument hash**. Which fields are required,
+and how are arguments normalized without coupling to each tool? (See
+[RFC 0003](../rfcs/0003-audit-format.md) and
+[RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md).)
+
+---
+
+## Mutating actions
+
+### Whose responsibility is mutating-action safety?
+
+Write actions (delete a table, charge a card, restart a service) carry far more
+risk than reads. Should Aegize understand effect / blast-radius and be able to
+require dry-run or approval for destructive writes — and where is the line between
+Aegize (govern + record) and the tool (implement idempotency, dry-run, rollback)?
+Explored in [RFC 0007](../rfcs/0007-mutating-action-safety.md).
 
 ---
 
