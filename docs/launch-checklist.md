@@ -15,9 +15,9 @@ _Status verified: 2026-06-27 (repo state + live endpoint checks)._
 - [x] Temporary logo — `assets/logo.png`; white logomark used on the site and in the README header.
 - [ ] Final logo — deliberately TBD ([decision 012](./decisions.md)); the temporary mark is a placeholder.
 - [x] Favicon — `web/src/app/icon.png` (dark tile + white mark).
-- [ ] GitHub profile — not verifiable from the repo; set up a profile/org presence.
+- [~] GitHub profile — exists (name, avatar, company "Aegize", and an Aegize-branded profile README). Remaining: bio still says "AgentGuard" (→ "Aegize"), website field empty (→ https://aegize.com), and the `aegize` repo is not pinned.
 - [x] GitHub repo description — set to "Infrastructure for autonomous AI agents: identity, policy, permissions, approval workflows, and audit."
-- [~] Website links — present in the README and `pyproject.toml`; the GitHub repo **homepage URL field is still empty** (set it to https://aegize.com).
+- [x] Website links — present in the README, `pyproject.toml`, and the GitHub repo homepage (https://aegize.com).
 - [x] Consistent tagline — "Infrastructure for autonomous AI agents." used across the README, the site, package metadata, and the repo description.
 
 ## GitHub
@@ -68,9 +68,9 @@ _Status verified: 2026-06-27 (repo state + live endpoint checks)._
 
 ## Open follow-ups (the gaps above, collected)
 
-- [ ] Set the GitHub repo **homepage URL** to https://aegize.com.
+- [x] Set the GitHub repo **homepage URL** to https://aegize.com.
 - [ ] Connect **www.aegize.com** (custom domain or redirect to apex).
-- [ ] Stand up a **GitHub profile/org** presence.
+- [~] Polish the **GitHub profile**: fix bio ("AgentGuard" → "Aegize"), set the website field to https://aegize.com, and pin the `aegize` repo. (Web UI; the `gh` token lacks the `user` scope.)
 - [~] Record and publish the **60-second video** from the existing package.
 - [ ] Commit/finalize and **publish the announcement** posts (LinkedIn, HN, X, Reddit, email).
 - [ ] Final **brand mark** to replace the temporary logo (no deadline; tracked, not blocking).

@@ -27,7 +27,7 @@ launch itself. Resist scope. Shipping and learning beats building more.
 
 Small, finishable, unblock-the-launch items.
 
-- [ ] Set the GitHub repo **homepage URL** to https://aegize.com (the field is empty).
+- [x] Set the GitHub repo **homepage URL** to https://aegize.com.
 - [ ] Connect **www.aegize.com** in Cloudflare (custom domain or redirect to apex). Apex already serves; `www` does not resolve.
 - [~] Finalize the three existing announcement drafts (LinkedIn, Show HN, X) — refresh for current positioning/URLs and save them somewhere durable. Do **not** publish yet.
 
@@ -35,7 +35,7 @@ Small, finishable, unblock-the-launch items.
 
 Complete the launch foundation and do a quiet launch.
 
-- [ ] **GitHub profile** — stand up a clean profile/org presence (avatar, bio, pinned `aegize` repo). Priority #2; the last unfinished foundation item.
+- [~] **GitHub profile** — exists with an Aegize-branded profile README. Remaining (web UI): fix the bio (still says "AgentGuard" → "Aegize"), set the website field to https://aegize.com, and pin the `aegize` repo. Priority #2.
 - [~] **Record the 60-second video** from the existing package (`docs/launch-video.md` + the demo GIF / montage / end-card assets). Keep it simple; the assets are ready.
 - [ ] **Final foundation pass** — read the README top-to-bottom as a newcomer; fix any rough edge. Confirm all links resolve (site, docs, badges, architecture SVG, demo GIF).
 - [ ] **Publish quietly first** — soft launch: share the repo + site with a small, friendly audience (a few peers / one community), not the front page of anything. Priority #9.
@@ -93,9 +93,9 @@ How the ten current priorities sit against this plan:
 | # | Priority | Status |
 | - | -------- | ------ |
 | 1 | Finish rename to Aegize | `[x]` done |
-| 2 | Finish GitHub profile | `[ ]` this week |
+| 2 | Finish GitHub profile | `[~]` exists; bio/website/pin remaining |
 | 3 | Finish repo README | `[x]` done |
-| 4 | Add website link | `[~]` README/pyproject done; repo homepage URL still empty (today) |
+| 4 | Add website link | `[x]` README, pyproject, and repo homepage all set |
 | 5 | Add architecture diagram | `[x]` done (`docs/architecture.svg`) |
 | 6 | Add demo GIF | `[x]` done (`assets/demo.gif`) |
 | 7 | Launch aegize.com | `[~]` apex live; `www` pending (today) |
