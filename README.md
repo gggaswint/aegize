@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="./assets/logo-512.png" alt="Aegize" width="360">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/logo-dark.png">
+    <img src="./assets/logo-light.png" alt="Aegize" width="150">
+  </picture>
 </p>
 
 # Aegize
@@ -8,10 +11,10 @@ Infrastructure for autonomous AI agents.
 
 **[Website](https://aegize.com)** • **[GitHub](https://github.com/gggaswint/aegize)**
 
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![Status](https://img.shields.io/badge/status-alpha-orange.svg)](#roadmap)
-[![Version](https://img.shields.io/badge/version-0.2.0-blueviolet.svg)](#roadmap)
+[![Python](https://img.shields.io/badge/python-3.9%2B-3776ab?style=flat-square)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)](./LICENSE)
+[![Status](https://img.shields.io/badge/status-alpha-d29922?style=flat-square)](#roadmap)
+[![Version](https://img.shields.io/badge/version-0.2.0-5b9dff?style=flat-square)](#roadmap)
 
 Aegize is the runtime layer between autonomous AI agents and the tools they use.
 

@@ -19,7 +19,7 @@ export function Architecture() {
           height={988}
           loading="lazy"
           decoding="async"
-          className="mx-auto block h-auto w-full max-w-4xl rounded-xl border border-border"
+          className="mx-auto block h-auto w-full max-w-4xl rounded-xl border border-border-strong"
         />
       </Reveal>
     </Section>
