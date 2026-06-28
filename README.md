@@ -100,17 +100,15 @@ and confidence in deployment are the rest.
 
 ## Install
 
-```bash
-pip install aegize
-```
-
-Or from source:
+Aegize isn't on PyPI yet — install from source:
 
 ```bash
-git clone https://github.com/gggaswint/aegize
+git clone https://github.com/gggaswint/aegize.git
 cd aegize
-pip install -e ".[dev]"
+pip install -e .
 ```
+
+To run the tests and linter too, install the dev extras: `pip install -e ".[dev]"`.
 
 ## Quickstart
 
