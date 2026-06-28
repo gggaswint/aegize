@@ -364,6 +364,11 @@ Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the dev
 setup, the project's scope and design principles, and the bar for a mergeable
 change.
 
+> **Before making major changes, read [CLAUDE.md](./CLAUDE.md) and the project
+> documents in [`docs/`](./docs).** They are the source of truth for Aegize's
+> direction, positioning, and design. (`python scripts/context_check.py` confirms
+> they're present.)
+
 ## Reporting vulnerabilities
 
 Aegize governs what agents are allowed to do, so we treat weaknesses in it

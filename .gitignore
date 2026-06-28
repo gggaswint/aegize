@@ -22,7 +22,9 @@ examples/demo_audit.jsonl
 .DS_Store
 
 # Local tooling / editor
-.claude/
+# Ignore local Claude settings, but keep the committed usage guide.
+.claude/*
+!.claude/README.md
 .idea/
 .vscode/
 
