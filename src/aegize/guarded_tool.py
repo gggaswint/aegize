@@ -62,7 +62,7 @@ class GuardedTool:
             audit_log=audit,
             risk_level="low",
         )
-        result = safe_search("AI safety companies")
+        result = safe_search("Aegize runtime")
 
     Order of operations on every call:
 

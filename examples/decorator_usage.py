@@ -53,7 +53,7 @@ def main() -> None:
     # 1. Explicit binding -> a plain callable you can register with a tool server.
     #    e.g. server.add_tool(guard(send_email, context=ctx))
     safe_search = guard(web_search, context=ctx)
-    print("search:", safe_search("AI safety companies"))
+    print("search:", safe_search("Aegize runtime"))
     print("  (preserves name/signature for registries:", safe_search.__name__ + ")")
 
     # 2. Default context: call decorated tools directly inside the block.

@@ -97,9 +97,9 @@ def main() -> None:
     print(f"Audit log: {_display_path(AUDIT_PATH)}")
     print()
 
-    attempt(1, "web_search.search   query='AI safety companies'",
+    attempt(1, "web_search.search   query='Aegize runtime'",
             guard("web_search", "search", web_search, "low"),
-            "AI safety companies")
+            "Aegize runtime")
 
     attempt(2, "email.send          to='ceo@example.com'",
             guard("email", "send", send_email, "high"),

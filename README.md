@@ -44,8 +44,8 @@ audit record for every attempt.
 ```text
 $ python examples/demo_story.py
 
-[1] web_search.search   query='AI safety companies'
-    ALLOWED  -> results for 'AI safety companies'
+[1] web_search.search   query='Aegize runtime'
+    ALLOWED  -> results for 'Aegize runtime'
 
 [2] email.send          to='ceo@example.com'
     APPROVAL REQUIRED  -> held for human review (not executed)
@@ -140,7 +140,7 @@ safe_web_search = GuardedTool(
     risk_level="low",
 )
 
-result = safe_web_search("AI safety companies")
+result = safe_web_search("Aegize runtime")
 ```
 
 If the policy allows the action, the function runs and two audit records are
@@ -151,7 +151,7 @@ written (authorization + result). If not, Aegize raises `PolicyDenied` or
 from aegize import PolicyDenied, ApprovalRequired
 
 try:
-    safe_web_search("AI safety companies")
+    safe_web_search("Aegize runtime")
 except ApprovalRequired as exc:
     # route to a human approval workflow
     ...
@@ -266,8 +266,8 @@ Every attempt is appended to a JSONL file — one self-contained JSON object per
 line, easy to tail, `grep`, or ship to a SIEM. A single allowed call:
 
 ```json
-{"timestamp": "2026-06-27T18:00:00+00:00", "event": "allowed", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "input_summary": "'AI safety companies'", "reason": "allowed by rule for tool 'web_search'"}
-{"timestamp": "2026-06-27T18:00:00+00:00", "event": "execution_succeeded", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "result_summary": "'searched: AI safety companies'"}
+{"timestamp": "2026-06-27T18:00:00+00:00", "event": "allowed", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "input_summary": "'Aegize runtime'", "reason": "allowed by rule for tool 'web_search'"}
+{"timestamp": "2026-06-27T18:00:00+00:00", "event": "execution_succeeded", "agent_id": "research_bot", "tool_name": "web_search", "operation": "search", "risk_level": "low", "result_summary": "'searched: Aegize runtime'"}
 ```
 
 Events: `allowed`, `denied`, `approval_required`, `execution_succeeded`,

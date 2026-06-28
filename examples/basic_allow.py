@@ -37,7 +37,7 @@ def main() -> None:
         risk_level="low",
     )
 
-    result = safe_web_search("AI safety companies")
+    result = safe_web_search("Aegize runtime")
     print("Result:", result)
     print("Audit events:", [r["event"] for r in audit.read_all()])
 

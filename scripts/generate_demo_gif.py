@@ -28,7 +28,7 @@ from PIL import Image
 HEADER = "# An AI agent makes three tool calls. Aegize governs each one."
 
 COMMANDS = [
-    {"cmd": 'web_search("Aegize")', "icon": "check", "label": "Allowed", "color": GREEN},
+    {"cmd": 'web_search("Aegize runtime")', "icon": "check", "label": "Allowed", "color": GREEN},
     {"cmd": 'send_email(to="ceo@acme.com", …)', "icon": "clock",
      "label": "Approval required", "color": AMBER},
     {"cmd": 'execute_shell("rm -rf /")', "icon": "cross", "label": "Policy denied", "color": RED},
