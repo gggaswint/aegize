@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/logo-dark.png">
-    <img src="./assets/logo-light.png" alt="Aegize" width="150">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gggaswint/aegize/main/assets/logo-dark.png">
+    <img src="https://raw.githubusercontent.com/gggaswint/aegize/main/assets/logo-light.png" alt="Aegize" width="150">
   </picture>
 </p>
 
@@ -24,13 +24,13 @@ logging, observability, and runtime governance for every AI action.
 > Every agent action must have identity, permission, policy enforcement, and audit.
 
 <p align="center">
-  <img src="./assets/demo.gif" alt="Aegize demo: an agent makes three tool calls — web search allowed, email approval required, shell command denied — each governed and audited by Aegize" width="1000">
+  <img src="https://raw.githubusercontent.com/gggaswint/aegize/main/assets/demo.gif" alt="Aegize demo: an agent makes three tool calls — web search allowed, email approval required, shell command denied — each governed and audited by Aegize" width="1000">
 </p>
 
 ## Architecture
 
 <p align="center">
-  <img src="./assets/architecture.svg" alt="How Aegize fits into an AI agent stack: AI frameworks send tool calls into the Aegize runtime (identity, policy engine, permissions, approval workflows, audit logging, observability); only allowed actions reach tools. Every AI action passes through Aegize before reaching the outside world." width="900">
+  <img src="https://raw.githubusercontent.com/gggaswint/aegize/main/assets/architecture.svg" alt="How Aegize fits into an AI agent stack: AI frameworks send tool calls into the Aegize runtime (identity, policy engine, permissions, approval workflows, audit logging, observability); only allowed actions reach tools. Every AI action passes through Aegize before reaching the outside world." width="900">
 </p>
 
 ---
@@ -100,15 +100,17 @@ and confidence in deployment are the rest.
 
 ## Install
 
-Aegize isn't on PyPI yet — install from source:
+```bash
+pip install aegize
+```
+
+Or from source (for development):
 
 ```bash
 git clone https://github.com/gggaswint/aegize.git
 cd aegize
-pip install -e .
+pip install -e ".[dev]"
 ```
-
-To run the tests and linter too, install the dev extras: `pip install -e ".[dev]"`.
 
 ## Quickstart
 

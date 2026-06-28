@@ -9,7 +9,7 @@ description = "Infrastructure for autonomous AI agents: identity, policy, permis
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "Geoffrey", email = "ggaswint@gmail.com" }]
+authors = [{ name = "Geoffrey Gaswint", email = "ggaswint@gmail.com" }]
 keywords = [
   "ai",
   "agents",
@@ -41,12 +41,24 @@ dependencies = ["PyYAML>=6.0"]
 dev = ["pytest>=7.0", "ruff>=0.1"]
 
 [project.urls]
-Homepage = "https://github.com/gggaswint/aegize"
+Homepage = "https://aegize.com"
 Repository = "https://github.com/gggaswint/aegize"
+Documentation = "https://github.com/gggaswint/aegize#readme"
 Issues = "https://github.com/gggaswint/aegize/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/aegize"]
+
+# Keep the source distribution lean — only the package, tests, examples, and metadata.
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/examples",
+  "/README.md",
+  "/LICENSE",
+  "/pyproject.toml",
+]
 
 [tool.ruff]
 line-length = 100
