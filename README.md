@@ -331,6 +331,7 @@ understanding where the project is headed.
 - [Decisions](./docs/decisions.md) — the record of why things are the way they are.
 - [Open questions](./docs/questions.md) — unresolved product and architecture questions.
 - [RFCs](./rfcs/README.md) — how significant changes are proposed and recorded.
+- [Launch checklist](./docs/launch-checklist.md) — what's done and what's left to launch.
 - [CLAUDE.md](./CLAUDE.md) — operating instructions for AI coding sessions.
 
 ## Roadmap
