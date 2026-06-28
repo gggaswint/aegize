@@ -332,6 +332,7 @@ understanding where the project is headed.
 - [Open questions](./docs/questions.md) — unresolved product and architecture questions.
 - [RFCs](./rfcs/README.md) — how significant changes are proposed and recorded.
 - [Launch checklist](./docs/launch-checklist.md) — what's done and what's left to launch.
+- [Next steps](./docs/next-steps.md) — the focused two-week execution plan.
 - [CLAUDE.md](./CLAUDE.md) — operating instructions for AI coding sessions.
 
 ## Roadmap
