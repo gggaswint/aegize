@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "aegize"
-version = "0.2.0"
+version = "0.3.0"
 description = "Infrastructure for autonomous AI agents: identity, policy, permissions, approval workflows, and audit."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -40,6 +40,9 @@ dependencies = ["PyYAML>=6.0"]
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "ruff>=0.1"]
 
+[project.scripts]
+aegize = "aegize.cli:main"
+
 [project.urls]
 Homepage = "https://aegize.com"
 Repository = "https://github.com/gggaswint/aegize"
@@ -56,6 +59,7 @@ include = [
   "/tests",
   "/examples",
   "/README.md",
+  "/CHANGELOG.md",
   "/LICENSE",
   "/pyproject.toml",
 ]

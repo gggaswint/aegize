@@ -7,7 +7,7 @@ intent and sequence, not committed dates.
 
 ## Current status
 
-Aegize is an open-source Python SDK at **v0.2**. It is local, dependency-light
+Aegize is an open-source Python SDK at **v0.3**. It is local, dependency-light
 (PyYAML only), typed, and tested. It implements the core loop — identity,
 policy, permission decisions, approval gating, and audit — for tool calls.
 
@@ -21,6 +21,7 @@ Shipped capabilities:
 - **`guard()` adapter** — signature-preserving callable for tool registries / MCP.
 - **Permission decisions** — `allow` / `deny` / `require_approval`.
 - **JSONL audit logs** — append-only, one record per attempt and outcome.
+- **`aegize policy test` CLI** — assert policy decisions from a YAML test file.
 - **Runnable examples**, a **pytest** suite, and **Ruff** linting.
 
 ## Launch foundation
@@ -58,12 +59,14 @@ Make adoption frictionless:
 
 Meet agents where they already are:
 
+- [x] **Policy tests** — `aegize policy test <policy> <tests>` asserts
+  "agent + action → decision" from a YAML test file and exits non-zero on drift;
+  the first step of the policy-as-code lifecycle
+  ([RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md)).
 - **MCP adapter** — register guarded tools with MCP servers cleanly.
 - First-class helpers for common agent frameworks via the `guard()` callable.
 - **CLI policy validator** — lint and validate policy files (`aegize` CLI).
 - Policy schema validation with helpful errors.
-- **Policy tests** — assert "agent + action → decision"; the first step of the
-  policy-as-code lifecycle (exploring, [RFC 0008](../rfcs/0008-policy-as-code-lifecycle.md)).
 
 ## v0.4 — Observability
 
