@@ -260,6 +260,67 @@ Rule fields:
 > arguments of the call (and `metadata["path"]`) against the glob patterns. A
 > call with no matching path is denied.
 
+## Policy tests
+
+A policy is only as trustworthy as the behavior you can prove it has. Aegize
+ships a small CLI to assert that a policy makes the decisions you expect — before
+it ever gates a real agent. Write the expectations as YAML:
+
+```yaml
+# policy_tests.yaml
+tests:
+  - name: web search is allowed
+    agent: research_bot
+    tool: web_search
+    operation: search
+    expect: allow
+
+  - name: charging a card is denied
+    agent: research_bot
+    tool: payments
+    operation: charge
+    expect: deny
+
+  - name: reading outside the allowlist is denied
+    agent: research_bot
+    tool: file_reader
+    operation: read
+    metadata: { path: "/etc/passwd" }
+    expect: deny
+```
+
+Run them against a policy file:
+
+```bash
+aegize policy test examples/aegize.yaml examples/policy_tests.yaml
+```
+
+```text
+PASS  web search is allowed  (expected allow)
+PASS  charging a card is denied  (expected deny)
+PASS  reading outside the allowlist is denied  (expected deny)
+
+3 passed, 0 failed
+```
+
+The command **only evaluates policy** — it never executes a tool. It exits `0`
+when every case passes, `1` when any decision doesn't match, and `2` when a file
+is missing or malformed, so it drops straight into CI as a policy regression
+gate. Each case takes:
+
+| Field        | Required | Meaning                                                              |
+| ------------ | -------- | ------------------------------------------------------------------- |
+| `agent`      | yes      | The acting `agent_id` to evaluate.                                  |
+| `tool`       | yes      | Tool name.                                                          |
+| `operation`  | yes      | Operation name.                                                     |
+| `expect`     | yes      | Expected decision: `allow`, `deny`, or `require_approval`.          |
+| `name`       | no       | Label shown in the report (defaults to `test #N`).                 |
+| `risk_level` | no       | `low`…`critical` (default `low`); exercises `risk_level_max` rules. |
+| `metadata`   | no       | Extra call context, e.g. `{ path: ... }` for `paths` allowlists.    |
+
+This is the first step of the policy-as-code lifecycle explored in
+[RFC 0008](./rfcs/0008-policy-as-code-lifecycle.md).
+
 ## Audit log
 
 Every attempt is appended to a JSONL file — one self-contained JSON object per

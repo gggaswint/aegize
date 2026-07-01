@@ -1,0 +1,85 @@
+# Policy tests for examples/aegize.yaml.
+#
+# Each case asserts that a given (agent, tool, operation) — with optional
+# risk_level and metadata — produces an expected decision. Run with:
+#
+#     aegize policy test examples/aegize.yaml examples/policy_tests.yaml
+#
+# `expect` is one of: allow, deny, require_approval.
+# `risk_level` defaults to "low" and is one of: low, medium, high, critical.
+tests:
+  # --- allow ---
+  - name: web search is allowed
+    agent: research_bot
+    tool: web_search
+    operation: search
+    risk_level: low
+    expect: allow
+
+  - name: medium-risk search is still allowed (at the ceiling)
+    agent: research_bot
+    tool: web_search
+    operation: search
+    risk_level: medium
+    expect: allow
+
+  - name: reading inside the allowlisted path is allowed
+    agent: research_bot
+    tool: file_reader
+    operation: read
+    metadata: { path: "./safe_data/report.md" }
+    expect: allow
+
+  # --- require_approval ---
+  - name: sending email needs approval
+    agent: research_bot
+    tool: email
+    operation: send
+    expect: require_approval
+
+  - name: running a shell command needs approval
+    agent: research_bot
+    tool: shell
+    operation: execute
+    risk_level: high
+    expect: require_approval
+
+  # --- deny ---
+  - name: high-risk search exceeds the medium ceiling
+    agent: research_bot
+    tool: web_search
+    operation: search
+    risk_level: high
+    expect: deny
+
+  - name: reading outside the allowlisted path is denied
+    agent: research_bot
+    tool: file_reader
+    operation: read
+    metadata: { path: "/etc/passwd" }
+    expect: deny
+
+  - name: charging a card is explicitly denied
+    agent: research_bot
+    tool: payments
+    operation: charge
+    risk_level: critical
+    expect: deny
+
+  - name: deleting via shell is explicitly denied
+    agent: research_bot
+    tool: shell
+    operation: delete
+    expect: deny
+
+  - name: an unknown agent is denied by default
+    agent: stranger
+    tool: web_search
+    operation: search
+    expect: deny
+
+  - name: an unlisted operation is denied by default
+    agent: research_bot
+    tool: web_search
+    operation: scrape
+    expect: deny
